@@ -27,7 +27,7 @@ $components->formHelper = function($components) { return new Application\Helpers
 $controllers = new Application\Framework\ComponentManager($config);
 
 $controllers->loginController = function($components) { 
-	return function($route, & $stopPropagation) { 
+	return function(& $stopPropagation) { 
 		$logged = isset($_GET['logged']) ? true: false;
 		if ( ! $logged ) { 
 			$stopPropagation = true; 
@@ -37,7 +37,8 @@ $controllers->loginController = function($components) {
 };
 
 $controllers->indexController = function($components) { 
-	return function($route, & $stopPropagation) { 
+	return function(& $stopPropagation) { 
+		$route = isset($_GET['route']) ? $_GET['route']: '';
 		if ('' === $route) { 
 			$stopPropagation = true; 
 			echo 'Index'; 
@@ -46,7 +47,7 @@ $controllers->indexController = function($components) {
 };
 
 $controllers->error404Controller = function($components) { 
-	return function($route, & $stopPropagation) { 
+	return function(& $stopPropagation) { 
 		$stopPropagation = true; 
 		echo 'Erreur 404'; 
 	}; 
@@ -54,7 +55,6 @@ $controllers->error404Controller = function($components) {
 
 // Passer la requête à la chaîne de contrôleurs
 
-$route = isset($_GET['route']) ? $_GET['route']: '';
 $stopPropagation = false;
 
 foreach ($controllers->listComponents() as $controllerId) {
@@ -63,7 +63,7 @@ foreach ($controllers->listComponents() as $controllerId) {
 
 	if ( is_callable($controller) ) {
 
-		$controller($route, $stopPropagation);
+		$controller($stopPropagation);
 
 		if ($stopPropagation) {
 			exit;
