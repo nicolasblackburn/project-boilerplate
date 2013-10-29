@@ -22,7 +22,7 @@ $components->urlHelper = function($components) { return new Application\Helpers\
 $components->stringHelper = function($components) { return new Application\Helpers\StringHelper(); };
 $components->formHelper = function($components) { return new Application\Helpers\FormHelper(); };
 
-// Enregistrer les controlleurs
+// Enregistrer les contrôleurs
 
 $controllers = new Application\Framework\ComponentManager($config);
 
