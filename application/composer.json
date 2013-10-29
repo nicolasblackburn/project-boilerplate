@@ -1,0 +1,16 @@
+{
+    "name": "vendor/application",
+    "authors": [
+        {
+            "name": "Nicolas",
+            "email": "nicolas.blackburn.ca@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Application\\": "classes/"
+        }
+    }
+}
